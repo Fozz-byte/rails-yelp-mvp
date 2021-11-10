@@ -9,8 +9,15 @@ Restaurant.destroy_all
 puts "Deleted restaurants"
 
 
+
 5.times do
   restaurant = Restaurant.create(name: Faker::Restaurant.name, address: Faker::Address.full_address,
     phone_number: Faker::PhoneNumber.phone_number_with_country_code,
-    category: ["chinese", "italian", "japanese", "french", "belgian"].sample, rating: rand(0..5))
+    category: ["chinese", "italian", "japanese", "french", "belgian"].sample)
+  review = Review.new(content: Faker::Restaurant.review, rating: rand(0..5))
+  p review
+  review.restaurant = restaurant
+  review.save
+  p review
+
 end
